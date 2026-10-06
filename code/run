@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Deployment verification: Git check capsule. Prints the identity banner and the latest lines of
+# dv-git-check.md (the file the verification run appends to and commits).
+set -euo pipefail
+cd "$(dirname "$0")"
+echo "DV-BANNER capsule=${CO_CAPSULE_ID:-unset} computation=${CO_COMPUTATION_ID:-unset} cpus=${CO_CPUS:-unset} memory=${CO_MEMORY:-unset}"
+RESULTS="${DV_RESULTS_DIR:-/results}"
+tail -n 5 dv-git-check.md
+mkdir -p "$RESULTS"
+tail -n 5 dv-git-check.md > "$RESULTS/dv-git-check-tail.txt"
+echo "DV-GIT-CHECK OK"
